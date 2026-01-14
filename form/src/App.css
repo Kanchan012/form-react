@@ -1,42 +1,76 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(180, 177, 177);
+}
+.container{
+  margin-left: 600px;
+}
+
+.form-card {
+  background-color: #ffffff;
+  padding: 20px 25px;
+  width: 410px;
+  border-radius: 6px;
+  box-shadow: 0 8px 15px rgb(34, 34, 34);
+}
+
+.form-card h1 {
   text-align: center;
+  margin-top: 10px;
+  color: red;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.form-group {
+  margin-bottom: 15px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.form-group input[type="text"] {
+  width: 100%;
+  padding: 7px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
 }
 
-.card {
-  padding: 2em;
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.read-the-docs {
-  color: #888;
+.options label {
+  font-weight: normal;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 8px;
+  background-color: #337ab7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #286090;
+}
+
+.result {
+  margin-top: 15px;
+  padding: 10px;
+  color: black;
+  background-color: #eef3ff;
+  border-radius: 4px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
 }
