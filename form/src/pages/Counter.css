@@ -17,11 +17,12 @@ body {
 }
 .add1 {
   display: flex;
-  gap: 25px;
+  gap: 20px;
   justify-content: center;
 }
+
 .add2 input {
-  width: 80px;
+  width: 90px;
   background-color: rgb(148, 183, 172);
   border: none;
   margin-right: 12px;
@@ -32,4 +33,5 @@ button{
   background-color: rgb(148, 183, 172);
   border: none;
   font-size: 18px;
+
 }
