@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Counter.css";
 function Counter() {
   const [val, setVal] = useState(0);
@@ -7,7 +7,7 @@ function Counter() {
   return (
     <>
       <div className="text">
-        <h1>React Counter</h1>
+        <h1>Counter</h1>
       </div>
       <br />
       <div className="add">
