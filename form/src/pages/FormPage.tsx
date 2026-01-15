@@ -1,9 +1,8 @@
 import { useState } from "react";
-import InputField from "../components/InputField";
-import RadioGroup from "../components/RadioGroup";
-import CheckboxGroup from "../components/CheckboxGroup";
+import FormInput from "../components/FormInput";
 import FormResult from "../components/FormResult";
-import "./FormPage.css"
+import "./FormPage.css";
+
 function FormPage() {
   const [description, setDescription] = useState("");
   const [gender, setGender] = useState("");
@@ -20,23 +19,28 @@ function FormPage() {
       <form className="form-card" onSubmit={handleSubmit}>
         <h1>Simple Form</h1>
 
-        <InputField
+        <FormInput
           label="Description"
+          type="text"
+          name="description"
           placeholder="Enter description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={setDescription}
         />
 
-        <RadioGroup
+        <FormInput
           label="Gender"
+          type="radio"
           name="gender"
           options={["Male", "Female"]}
-          selectedValue={gender}
+          value={gender}
           onChange={setGender}
         />
 
-        <CheckboxGroup
+        <FormInput
           label="Subjects"
+          type="checkbox"
+          name="subjects"
           options={["Maths", "Science", "Social", "Health", "Computer"]}
           values={subjects}
           onChange={setSubjects}
