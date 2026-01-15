@@ -51,7 +51,7 @@ function App() {
                   onChange={setSubjects}
                 />
 
-                  <nav className="nav">
+                  <nav className="navbar">
                     <NavLink to="/">Form</NavLink>
                     <NavLink to="/counter">Counter</NavLink>
                   </nav>
