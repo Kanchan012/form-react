@@ -1,0 +1,22 @@
+.navbar {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  background: #f5f5f5;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  align-content: center;
+}
+
+.navbar a.active {
+  font-weight: bold;
+  border: 2px solid rgb(181, 166, 166);
+  background-color: rgb(165, 246, 246);
+  padding: 4px;
+  border-radius: 6px;
+  color: blue;
+}

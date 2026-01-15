@@ -1,6 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
-
 import NavBar from "./components/Navbar";
 import FormPage from "./pages/FormPage";
 import Counter from "./pages/Counter";
@@ -10,7 +8,6 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-
       <Routes>
         <Route path="/" element={<FormPage />} />
         <Route path="/counter" element={<Counter />} />
