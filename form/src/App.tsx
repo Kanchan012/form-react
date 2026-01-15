@@ -1,102 +1,10 @@
 import { useState } from "react";
 import "./App.css";
 
-type InputFieldProps = {
-  label: string;
-  type: string;
-  placeholder: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
-function InputField({
-  label,
-  type,
-  placeholder,
-  value,
-  onChange,
-}: InputFieldProps) {
-  return (
-    <div className="form-group">
-      <label>{label}</label>
-      <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
-    </div>
-  );
-}
-
-type RadioGroupProps = {
-  label: string;
-  name: string;
-  options: string[];
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
-function RadioGroup({
-  label,
-  name,
-  options,
-  value,
-  onChange,
-}: RadioGroupProps) {
-  return (
-    <div className="form-group">
-      <label>{label}</label>
-      <div className="options">
-        {options.map((option) => (
-          <label key={option}>
-            <input
-              type="radio"
-              name={name}
-              value={option}
-              checked={value === option}
-              onChange={onChange}
-            />
-            {option}
-          </label>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-type CheckboxGroupProps = {
-  label: string;
-  options: string[];
-  selectedValues: string[];
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
-function CheckboxGroup({
-  label,
-  options,
-  selectedValues,
-  onChange,
-}: CheckboxGroupProps) {
-  return (
-    <div className="form-group">
-      <label>{label}</label>
-      <div className="options">
-        {options.map((option) => (
-          <label key={option}>
-            <input
-              type="checkbox"
-              value={option}
-              checked={selectedValues.includes(option)}
-              onChange={onChange}
-            />
-            {option}
-          </label>
-        ))}
-      </div>
-    </div>
-  );
-}
+import InputField from "./components/InputField";
+import CheckboxGroup from "./components/CheckboxGroup";
+import FormResult from "./components/FormResult";
+import RadioGroup from "./components/RadioGroup";
 
 function App() {
   const [description, setDescription] = useState("");
@@ -104,72 +12,51 @@ function App() {
   const [subjects, setSubjects] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubjectChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = e.target.value;
-    setSubjects((prev) =>
-      prev.includes(value)
-        ? prev.filter((item) => item !== value)
-        : [...prev, value]
-    );
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e:React.FormEvent)=>{
     e.preventDefault();
     setSubmitted(true);
   };
-
-  return (
+  return(
     <div className="container">
       <form className="form-card" onSubmit={handleSubmit}>
         <h1>Simple Form</h1>
 
         <InputField
           label="Description"
-          type="text"
-          placeholder="Enter description"
+           placeholder="Enter description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}  
         />
 
-        <RadioGroup
+         <RadioGroup
           label="Gender"
           name="gender"
           options={["Male", "Female"]}
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
+          selectedValue={gender}
+          onChange={setGender}
         />
 
-        <CheckboxGroup
+          <CheckboxGroup
           label="Subjects"
           options={["Maths", "Science", "Social", "Health", "Computer"]}
-          selectedValues={subjects}
-          onChange={handleSubjectChange}
+          values={subjects}
+          onChange={setSubjects}
         />
 
-        <button type="submit" className="submit-btn">
+        <button className="submit-btn" type="submit">
           Submit
         </button>
 
         {submitted && (
-          <div className="result">
-            {description && (
-              <p><strong>Description:</strong> {description}</p>
-            )}
-            {gender ? (
-              <p><strong>Gender:</strong> {gender}</p>
-            ) : (
-              <p className="error">Please select gender</p>
-            )}
-            {subjects.length > 0 && (
-              <p><strong>Subjects:</strong> {subjects.join(", ")}</p>
-            )}
-          </div>
+          <FormResult
+            description={description}
+            gender={gender}
+            subjects={subjects}
+          />
         )}
       </form>
     </div>
-  );
-}
+  )
 
+}
 export default App;
