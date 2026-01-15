@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import "./App.css";
-
+import Todo from "./pages/Todo";
 import Counter from "./pages/Counter"; 
 import InputField from "./components/InputField";
 import CheckboxGroup from "./components/CheckboxGroup";
@@ -54,6 +54,7 @@ function App() {
                   <nav className="navbar">
                     <NavLink to="/">Form</NavLink>
                     <NavLink to="/counter">Counter</NavLink>
+                     <NavLink to="/todo">Todo</NavLink>
                   </nav>
 <br />
                 <button className="submit-btn" type="submit">
@@ -72,6 +73,7 @@ function App() {
           }
         />
         <Route path="/counter" element={<Counter />} /> 
+        <Route path="/todo" element={<Todo />} />
       </Routes>
     </BrowserRouter>
   );
