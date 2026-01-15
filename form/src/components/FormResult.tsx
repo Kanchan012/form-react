@@ -1,39 +1,31 @@
-import React from "react";
-
-type RadioGroupProps = {
-  label: string;
-  name: string;
-  options: string[];
-  selectedValue: string;
-  onChange: (value: string) => void;
+type FormResultProps = {
+  description: string;
+  gender: string;
+  subjects: string[];
 };
 
-const RadioGroup: React.FC<RadioGroupProps> = ({
-  label,
-  name,
-  options,
-  selectedValue,
-  onChange,
+const FormResult: React.FC<FormResultProps> = ({
+  description,
+  gender,
+  subjects,
 }) => {
   return (
-    <div className="form-group">
-      <label>{label}</label>
-      <div className="options">
-        {options.map((option) => (
-          <label key={option}>
-            <input
-              type="radio"
-              name={name}
-              value={option}
-              checked={selectedValue === option}
-              onChange={() => onChange(option)}
-            />
-            {option}
-          </label>
-        ))}
-      </div>
+    <div className="result">
+      {description && (
+        <p><strong>Description:</strong> {description}</p>
+      )}
+
+      {gender ? (
+        <p><strong>Gender:</strong> {gender}</p>
+      ) : (
+        <p className="error">Please select gender</p>
+      )}
+
+      {subjects.length > 0 && (
+        <p><strong>Subjects:</strong> {subjects.join(", ")}</p>
+      )}
     </div>
   );
 };
 
-export default RadioGroup;
+export default FormResult;
