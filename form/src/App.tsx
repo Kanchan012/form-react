@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
-import Navbar from "./components/Navbar";
+import NavBar from "./components/Navbar";
 import FormPage from "./pages/FormPage";
 import Counter from "./pages/Counter";
 import Todo from "./pages/Todo";
@@ -9,7 +9,7 @@ import Todo from "./pages/Todo";
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
+      <NavBar />
 
       <Routes>
         <Route path="/" element={<FormPage />} />
