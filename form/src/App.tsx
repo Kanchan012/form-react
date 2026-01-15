@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import "./App.css";
 
-// Pages
 import FormPage from "./pages/FormPage";
 import Counter from "./pages/Counter";
 import Todo from "./pages/Todo";

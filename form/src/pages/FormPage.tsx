@@ -3,7 +3,7 @@ import InputField from "../components/InputField";
 import RadioGroup from "../components/RadioGroup";
 import CheckboxGroup from "../components/CheckboxGroup";
 import FormResult from "../components/FormResult";
-
+import "./FormPage.css"
 function FormPage() {
   const [description, setDescription] = useState("");
   const [gender, setGender] = useState("");
