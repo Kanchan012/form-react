@@ -76,7 +76,6 @@ const FormInput: React.FC<FormInputProps> = (props) => {
     );
   }
 
-  // text input
   const { label, value, placeholder, onChange } = props;
   return (
     <div className="form-group">
@@ -90,5 +89,5 @@ const FormInput: React.FC<FormInputProps> = (props) => {
     </div>
   );
 };
-  
+
 export default FormInput;

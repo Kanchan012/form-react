@@ -1,5 +1,11 @@
 import { useState } from "react";
 import "./Todo.css"
+
+export type TodoType = {
+  id: number;
+  text: string;
+  completed: boolean;
+};
 function Todo() {
   const [task, setTask] = useState("");        
   const [tasks, setTasks] = useState<string[]>([]); 
