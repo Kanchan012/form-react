@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Todo.css"
 
 export type TodoType = {
@@ -7,9 +7,23 @@ export type TodoType = {
   completed: boolean;
 };
 function Todo() {
+  const[todos,setTodos]=useState<TodoType[]>([]);
+  const[filter,setFilter]=useState<"all" | "completed" | "incomplete">("all");
   const [task, setTask] = useState("");        
   const [tasks, setTasks] = useState<string[]>([]); 
   const [editIndex, setEditIndex] = useState<number | null>(null); 
+
+  useEffect(() => {
+    const saved = localStorage.getItem("tasks");
+    if (saved) {
+      setTodos(JSON.parse(saved));
+    }   
+  }, []);
+
+   useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
  const handleAddOrEdit = () => {
     if (task.trim() === "") return;
 
