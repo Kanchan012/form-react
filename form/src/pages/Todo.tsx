@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
+import TodoInput from "../components/TodoInput";
 import "./Todo.css";
 
 export type TodoType = {
@@ -60,7 +61,7 @@ function Todo() {
   return (
     <div className="todo-container">
       <h1>Todo App</h1>
-
+      <TodoInput onAdd={addTodo} />
       {filteredTodos.length === 0 ? (
         <p className="empty-msg">No tasks</p>
       ) : (
