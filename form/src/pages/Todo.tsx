@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import TodoInput from "../components/TodoInput";
 import TodoItem from "../components/TodoItem";
+import TodoFilter from "../components/TodoFilter";
 import "./Todo.css";
 
 export type TodoType = {
@@ -13,7 +14,6 @@ function Todo() {
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [filter, setFilter] = useState<"all" | "completed" | "incomplete">("all");
 
-  /* useEffect: load from localStorage */
   useEffect(() => {
     const saved = localStorage.getItem("todos");
     if (saved) {
@@ -21,12 +21,10 @@ function Todo() {
     }
   }, []);
 
-  /* useEffect: save to localStorage */
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  /* useCallback: add todo */
   const addTodo = useCallback((text: string) => {
     setTodos(prev => [
       ...prev,
@@ -34,7 +32,6 @@ function Todo() {
     ]);
   }, []);
 
-  /* useCallback: toggle complete */
   const toggleTodo = useCallback((id: number) => {
     setTodos(prev =>
       prev.map(todo =>
@@ -43,19 +40,13 @@ function Todo() {
     );
   }, []);
 
-  /* useCallback: delete */
   const deleteTodo = useCallback((id: number) => {
     setTodos(prev => prev.filter(todo => todo.id !== id));
   }, []);
 
-  /* useMemo: filtered todos */
   const filteredTodos = useMemo(() => {
-    if (filter === "completed") {
-      return todos.filter(t => t.completed);
-    }
-    if (filter === "incomplete") {
-      return todos.filter(t => !t.completed);
-    }
+    if (filter === "completed") {return todos.filter(t => t.completed);}
+    if (filter === "incomplete") {return todos.filter(t => !t.completed);}
     return todos;
   }, [todos, filter]);
 
@@ -63,6 +54,7 @@ function Todo() {
     <div className="todo-container">
       <h1>Todo App</h1>
       <TodoInput onAdd={addTodo} />
+      <TodoFilter filter={filter} setFilter={setFilter} />
       {filteredTodos.length === 0 ? (
         <p className="empty-msg">No tasks</p>
       ) : (
