@@ -1,80 +1,74 @@
-import { useEffect, useState } from "react";
-import "./Todo.css"
+import { useState, useEffect, useMemo, useCallback } from "react";
+import "./Todo.css";
 
 export type TodoType = {
   id: number;
   text: string;
   completed: boolean;
 };
-function Todo() {
-  const[todos,setTodos]=useState<TodoType[]>([]);
-  const[filter,setFilter]=useState<"all" | "completed" | "incomplete">("all");
-  const [task, setTask] = useState("");        
-  const [tasks, setTasks] = useState<string[]>([]); 
-  const [editIndex, setEditIndex] = useState<number | null>(null); 
 
+function Todo() {
+  const [todos, setTodos] = useState<TodoType[]>([]);
+  const [filter, setFilter] = useState<"all" | "completed" | "incomplete">("all");
+
+  /* useEffect: load from localStorage */
   useEffect(() => {
-    const saved = localStorage.getItem("tasks");
+    const saved = localStorage.getItem("todos");
     if (saved) {
-      setTodos(JSON.parse(saved));
-    }   
+      setTodos(JSON.parse(saved)as TodoType[]);
+    }
   }, []);
 
-   useEffect(() => {
+  /* useEffect: save to localStorage */
+  useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
- const handleAddOrEdit = () => {
-    if (task.trim() === "") return;
+  /* useCallback: add todo */
+  const addTodo = useCallback((text: string) => {
+    setTodos(prev => [
+      ...prev,
+      { id: Date.now(), text, completed: false },
+    ]);
+  }, []);
 
-    if (editIndex !== null) {
-      const newTasks = [...tasks];
-      newTasks[editIndex] = task;
-      setTasks(newTasks);
-      setEditIndex(null);
-    } else {
-      setTasks([...tasks, task]);
+  /* useCallback: toggle complete */
+  const toggleTodo = useCallback((id: number) => {
+    setTodos(prev =>
+      prev.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  }, []);
+
+  /* useCallback: delete */
+  const deleteTodo = useCallback((id: number) => {
+    setTodos(prev => prev.filter(todo => todo.id !== id));
+  }, []);
+
+  /* useMemo: filtered todos */
+  const filteredTodos = useMemo(() => {
+    if (filter === "completed") {
+      return todos.filter(t => t.completed);
     }
-    setTask(""); 
-  };
-
-  const deleteTask = (index: number) => {
-    setTasks(tasks.filter((_, i) => i !== index));
-    if (editIndex === index) setEditIndex(null); 
-  };
-
-   const editTask = (index: number) => {
-    setTask(tasks[index]);
-    setEditIndex(index);
-  };
-
+    if (filter === "incomplete") {
+      return todos.filter(t => !t.completed);
+    }
+    return todos;
+  }, [todos, filter]);
 
   return (
-   <div className="todo-container">
-      <h1>Todo List</h1>
-      <div className="todo-input">
-        <input
-          type="text"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
-          placeholder="Enter task"
-        />
-        <button onClick={handleAddOrEdit}>
-          {editIndex !== null ? "Update" : "Add"}
-        </button>
-      </div>
+    <div className="todo-container">
+      <h1>Todo App</h1>
 
-      {tasks.length === 0 ? (
-        <p className="empty-msg">No tasks yet</p>
+      {filteredTodos.length === 0 ? (
+        <p className="empty-msg">No tasks</p>
       ) : (
         <ul className="task-list">
-          {tasks.map((t, i) => (
-            <li key={i} className="task-item">
-              <span>{t}</span>
-              <div className="task-buttons">
-                <button className="edit-btn" onClick={() => editTask(i)}>Edit</button>
-                <button className="delete-btn" onClick={() => deleteTask(i)}>Delete</button>
-              </div>
+          {filteredTodos.map(todo => (
+            <li key={todo.id} className={todo.completed ? "completed" : ""}>
+              <span onClick={() => toggleTodo(todo.id)}>{todo.text}</span>
+              <button onClick={() => deleteTodo(todo.id)}>Delete</button>
             </li>
           ))}
         </ul>
