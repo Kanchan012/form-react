@@ -17,7 +17,7 @@ function Todo() {
   useEffect(() => {
     const saved = localStorage.getItem("todos");
     if (saved) {
-      setTodos(JSON.parse(saved)as TodoType[]);
+      setTodos(JSON.parse(saved)  );
     }
   }, []);
 
@@ -45,8 +45,8 @@ function Todo() {
   }, []);
 
   const filteredTodos = useMemo(() => {
-    if (filter === "completed") {return todos.filter(t => t.completed);}
-    if (filter === "incomplete") {return todos.filter(t => !t.completed);}
+    if (filter === "completed") return todos.filter(t => t.completed);
+    if (filter === "incomplete") return todos.filter(t => !t.completed); 
     return todos;
   }, [todos, filter]);
 
