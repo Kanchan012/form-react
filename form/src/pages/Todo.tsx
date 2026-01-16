@@ -2,13 +2,8 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import TodoInput from "../components/TodoInput";
 import TodoItem from "../components/TodoItem";
 import TodoFilter from "../components/TodoFilter";
+import { TodoType } from "../types/Todo"
 import "./Todo.css";
-
-export type TodoType = {
-  id: number;
-  text: string;
-  completed: boolean;
-};
 
 function Todo() {
   const [todos, setTodos] = useState<TodoType[]>([]);
@@ -17,10 +12,10 @@ function Todo() {
   useEffect(() => {
     const saved = localStorage.getItem("todos");
     if (saved) {
-      setTodos(JSON.parse(saved)  );
+      setTodos(JSON.parse(saved) as TodoType[]);
     }
   }, []);
-
+  
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
@@ -46,15 +41,17 @@ function Todo() {
 
   const filteredTodos = useMemo(() => {
     if (filter === "completed") return todos.filter(t => t.completed);
-    if (filter === "incomplete") return todos.filter(t => !t.completed); 
+    if (filter === "incomplete") return todos.filter(t => !t.completed);
     return todos;
   }, [todos, filter]);
 
   return (
     <div className="todo-container">
       <h1>Todo App</h1>
+
       <TodoInput onAdd={addTodo} />
       <TodoFilter filter={filter} setFilter={setFilter} />
+
       {filteredTodos.length === 0 ? (
         <p className="empty-msg">No tasks</p>
       ) : (
