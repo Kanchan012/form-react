@@ -1,4 +1,4 @@
-import { TodoType } from "../pages/Todo";
+import { TodoType } from "../types/todo";
 
 type Props = {
   todo: TodoType;
@@ -9,18 +9,17 @@ type Props = {
 function TodoItem({ todo, onToggle, onDelete }: Props) {
   return (
     <li className="task-item">
-      <span
-        onClick={() => onToggle(todo.id)}
-        style={{
-          textDecoration: todo.completed ? "line-through" : "none",
-          cursor: "pointer",
-        }}
-      >
-        {todo.text}
-      </span>
-      <button onClick={() => onDelete(todo.id)} className="delete-btn">
-        Delete
-      </button>
+      <label>
+        <input
+          type="checkbox"
+          checked={todo.completed}
+          onChange={() => onToggle(todo.id)}
+        />
+        <span style={{ textDecoration: todo.completed ? "line-through" : "none" }}>
+          {todo.text}
+        </span>
+      </label>
+      <button onClick={() => onDelete(todo.id)}>Delete</button>
     </li>
   );
 }

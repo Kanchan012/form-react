@@ -2,19 +2,23 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import TodoInput from "../components/TodoInput";
 import TodoItem from "../components/TodoItem";
 import TodoFilter from "../components/TodoFilter";
-import { TodoType } from "../types/Todo"
+import  { TodoType } from "../types/todo";
 import "./Todo.css";
 
 function Todo() {
-  const [todos, setTodos] = useState<TodoType[]>([]);
   const [filter, setFilter] = useState<"all" | "completed" | "incomplete">("all");
-
-  useEffect(() => {
-    const saved = localStorage.getItem("todos");
-    if (saved) {
-      setTodos(JSON.parse(saved) as TodoType[]);
+  const [todos, setTodos] = useState<TodoType[]>(() => {
+  const saved = localStorage.getItem("todos");
+  if (saved) {
+    try {
+      return JSON.parse(saved) as TodoType[];
+    } catch (e) {
+      console.error("Failed to parse todos from localStorage:", e);
     }
-  }, []);
+  }
+  return [];
+});
+
   
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
