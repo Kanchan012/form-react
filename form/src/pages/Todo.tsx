@@ -21,26 +21,27 @@ function Todo() {
  
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+  });
 
   const addTodo = useCallback((text: string) => {
-    setTodos(prev => [
-      ...prev,
-      { id: Date.now(), text, completed: false },
-    ]);
+    setTodos(prev => [...prev,{ id: Date.now(), text, completed: false }]);
   }, []);
 
   const toggleTodo = useCallback((id: number) => {
     setTodos(prev =>
-      prev.map(todo =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
+      prev.map(todo =>todo.id === id ? { ...todo, completed: !todo.completed } : todo)
     );
   }, []);
 
   const deleteTodo = useCallback((id: number) => {
     setTodos(prev => prev.filter(todo => todo.id !== id));
   }, []);
+
+    const updateTodo = useCallback((id: number, newText: string) => {
+    setTodos(prev =>
+      prev.map(todo => (todo.id === id ? { ...todo, text: newText } : todo))
+    );
+  }, []); 
 
   const filteredTodos = useMemo(() => {
     if (filter === "completed") return todos.filter(t => t.completed);
@@ -65,6 +66,7 @@ function Todo() {
               todo={todo}
               onToggle={toggleTodo}
               onDelete={deleteTodo}
+              onUpdate={updateTodo}
             />
           ))}
         </ul>
