@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import TodoInput from "../components/TodoInput";
 import TodoItem from "../components/TodoItem";
 import TodoFilter from "../components/TodoFilter";
-import  type { TodoType } from "../types/todo";
+import type { TodoType } from "../types/Todo";
 import "./Todo.css";
 
 function Todo() {
