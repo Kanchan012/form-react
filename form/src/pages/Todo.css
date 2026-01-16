@@ -21,6 +21,13 @@
   padding: 14px;
 }
 
+.todo-input input[type="text"]{
+  border-radius: 4px;
+  border: 2px solid rgb(189, 186, 186);
+  width: 70%;
+  font-size: medium;
+  padding: 4px;
+}
 
 .btn-add {
   padding: 8px 16px;
@@ -28,7 +35,6 @@
   color: #fff;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
   font-weight: bold;
 }
 
