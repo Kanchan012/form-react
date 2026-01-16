@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import TodoInput from "../components/TodoInput";
+import TodoItem from "../components/TodoItem";
 import "./Todo.css";
 
 export type TodoType = {
@@ -67,10 +68,12 @@ function Todo() {
       ) : (
         <ul className="task-list">
           {filteredTodos.map(todo => (
-            <li key={todo.id} className={todo.completed ? "completed" : ""}>
-              <span onClick={() => toggleTodo(todo.id)}>{todo.text}</span>
-              <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-            </li>
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              onToggle={toggleTodo}
+              onDelete={deleteTodo}
+            />
           ))}
         </ul>
       )}
