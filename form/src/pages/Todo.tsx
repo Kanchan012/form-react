@@ -3,6 +3,7 @@ import TodoInput from "../components/TodoInput";
 import TodoItem from "../components/TodoItem";
 import TodoFilter from "../components/TodoFilter";
 import type { TodoType } from "../types/todo";
+import ThemeToggle from "../components/ThemeToggle";  
 import "./Todo.css";
 
 function Todo() {
@@ -51,7 +52,10 @@ function Todo() {
 
   return (
     <div className="todo-container">
-      <h1>Todo App</h1>
+       <header className="todo-header">
+        <h1>Todo App</h1>
+        <ThemeToggle />
+      </header>
 
       <TodoInput onAdd={addTodo} />
       <TodoFilter filter={filter} setFilter={setFilter} />
