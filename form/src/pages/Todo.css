@@ -75,6 +75,7 @@
 }
 
 .task-item {
+  border: 2px solid gray;
   display: flex;
   align-items: center;
   justify-content: space-between;
