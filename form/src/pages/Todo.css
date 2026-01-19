@@ -71,6 +71,7 @@
 .task-list {
   list-style: none;
   padding: 0;
+  color: #127ff5;
 }
 
 .task-item {
