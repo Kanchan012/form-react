@@ -1,6 +1,7 @@
+type Filter = "all" | "completed" | "incomplete";
 type Props = {
   filter: string;
-  setFilter: (value: "all" | "completed" | "incomplete") => void;
+  setFilter: (value: Filter) => void;
 };
 
 function TodoFilter({ filter, setFilter }: Props) {
