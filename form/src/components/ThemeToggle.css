@@ -15,7 +15,7 @@
   position: absolute;
   cursor: pointer;
   inset: 0;
-  background-color: burlywood;
+  background-color: hwb(34 53% 13%);
   border-radius: 34px;
   transition: background-color 0.3s;
 }
