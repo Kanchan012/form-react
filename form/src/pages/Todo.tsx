@@ -21,7 +21,7 @@ function Todo() {
  
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
-  });
+  },[todos]);
 
   const addTodo = useCallback((text: string) => {
     setTodos(prev => [...prev,{ id: Date.now(), text, completed: false }]);
